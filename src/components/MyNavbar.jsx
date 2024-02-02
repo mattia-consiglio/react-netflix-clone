@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { Link } from 'react-router-dom'
 
-function MyNavbar({ onlyLogo = false }) {
+function MyNavbar({ onlyLogo = false, isHome = false }) {
 	return (
 		<Navbar expand='lg' variant='dark'>
 			<Container>
@@ -22,7 +22,7 @@ function MyNavbar({ onlyLogo = false }) {
 								<Link to='/' className='nav-link'>
 									Home
 								</Link>
-								<Link to='/' className='nav-link active'>
+								<Link to='/' className={'nav-link' + (isHome ? ' active' : '')}>
 									TV Shows
 								</Link>
 								<Link to='/' className='nav-link'>

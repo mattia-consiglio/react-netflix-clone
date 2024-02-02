@@ -11,7 +11,7 @@ class HomePage extends Component {
 		return (
 			<>
 				<header>
-					<MyNavbar />
+					<MyNavbar isHome />
 				</header>
 				<main>
 					<TVShows />
