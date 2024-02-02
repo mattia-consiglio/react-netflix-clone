@@ -81,6 +81,10 @@ a {
 	text-decoration: none;
 }
 
+.cursor-pointer {
+	cursor: pointer;
+}
+
 .navbar-brand {
 	max-width: 100px;
 }
@@ -172,5 +176,15 @@ footer {
 	cursor: pointer;
 	&:hover {
 		transform: scale(1.1);
+	}
+}
+
+.avatar-choise {
+	height: 13.66vw;
+	width: 13.66vw;
+	background-size: cover;
+
+	&:hover {
+		border-color: #fff;
 	}
 }

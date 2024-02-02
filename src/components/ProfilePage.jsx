@@ -3,20 +3,40 @@ import MyNavbar from './MyNavbar'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import avatar from '../assets/imgs/avatar.png'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Modal from 'react-bootstrap/Modal'
 
 export default class ProfilePage extends Component {
 	state = {
-		name: 'Mattia',
 		language: 'English',
 		autoPlayNext: false,
 		autoPlayPreviews: false,
+		modalOpen: false,
+		avatar: '',
+		profileName: '',
 	}
 
 	componentDidMount() {
 		document.body.dataset.bsTheme = 'dark'
+		console.log(this.props)
+		this.setState(prevState => {
+			return {
+				avatar: this.props.avatar,
+				profileName: this.props.profileName,
+			}
+		})
+	}
+
+	componentDidUpdate(prevState, prevProps) {
+		//set the avatar image after first render if the page is call
+		if (this.state.avatar === '') {
+			this.setState(prevState => {
+				return {
+					avatar: this.props.avatar,
+				}
+			})
+		}
 	}
 	render() {
 		return (
@@ -37,10 +57,15 @@ export default class ProfilePage extends Component {
 								<Row>
 									<Col xs={12} md={3} className='d-flex justify-content-center mb-2 mb-lg-0'>
 										<div className='position-relative profile-img'>
-											<div className='circle-wrap text-light border border-1 border-light rounded-circle position-absolute d-flex align-items-center justify-content-center bg-dark p-2 shadow-lg bottom-0 ms-2 mb-2 start-0'>
+											<div
+												className='circle-wrap text-light border border-1 border-light rounded-circle position-absolute d-flex align-items-center justify-content-center bg-dark p-2 shadow-lg bottom-0 ms-2 mb-2 start-0 cursor-pointer'
+												onClick={() => {
+													this.setState({ modalOpen: true })
+												}}
+											>
 												<i className='bi bi-pencil-fill'></i>
 											</div>
-											<img className='img-fluid ' src={this.props.avatar} alt='avatar' />
+											<img className='img-fluid ' src={this.state.avatar} alt='avatar' />
 										</div>
 									</Col>
 									<Col xs={12} md={9}>
@@ -49,9 +74,9 @@ export default class ProfilePage extends Component {
 												<Form.Control
 													type='text'
 													className='bg-dark-subtle text-light fw-normal'
-													value={this.state.name}
+													value={this.state.profileName}
 													onChange={e => {
-														this.setState({ 'name': e.target.value })
+														this.setState({ profileName: e.target.value })
 													}}
 												/>
 											</div>
@@ -105,7 +130,14 @@ export default class ProfilePage extends Component {
 								<hr />
 								<Row>
 									<Col className='d-flex flex-wrap column-gap-3 row-gap-3'>
-										<Button variant='light' className='fw-bold px-4 px-3'>
+										<Button
+											variant='light'
+											className='fw-bold px-4 px-3'
+											onClick={() => {
+												this.props.setAvatar(this.state.avatar)
+												this.props.setProfileName(this.state.profileName)
+											}}
+										>
 											SAVE
 										</Button>
 										<Button variant='outline-secondary' className='fw-bold px-4 px-3'>
@@ -119,6 +151,33 @@ export default class ProfilePage extends Component {
 							</Col>
 						</Row>
 					</Container>
+					<Modal
+						show={this.state.modalOpen}
+						fullscreen
+						onHide={() => this.setState({ modalOpen: false })}
+					>
+						<Modal.Header closeButton>
+							<Modal.Title>Change avatar</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>
+							<Row xs={3} md={4} lg={6} className='g-4'>
+								{this.props.images.map((image, i) => {
+									return (
+										<Col key={image}>
+											<Button
+												variant='outline-secondary'
+												className='avatar-choise rounded'
+												onClick={() => {
+													this.setState({ modalOpen: false, avatar: image })
+												}}
+												style={{ backgroundImage: `url(${image})` }}
+											></Button>
+										</Col>
+									)
+								})}
+							</Row>
+						</Modal.Body>
+					</Modal>
 				</main>
 			</>
 		)
