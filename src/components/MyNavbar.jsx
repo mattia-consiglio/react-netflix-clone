@@ -1,13 +1,12 @@
 import React from 'react'
 import logo from '../assets/imgs/netflix_logo.png'
-import avatar from '../assets/imgs/avatar.png'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { Link } from 'react-router-dom'
 
-function MyNavbar({ onlyLogo = false, isHome = false }) {
+function MyNavbar({ onlyLogo = false, isHome = false, avatar }) {
 	return (
 		<Navbar expand='lg' variant='dark'>
 			<Container>

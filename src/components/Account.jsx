@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import avatar from '../assets/imgs/avatar.png'
 
 function LinkMap({ links, pe0 = false }) {
 	return (
@@ -45,7 +44,7 @@ class Account extends Component {
 		return (
 			<>
 				<header data-bs-theme='dark'>
-					<MyNavbar />
+					<MyNavbar avatar={this.props.avatar} />
 				</header>
 				<main>
 					<Container className='mt-4'>
@@ -124,7 +123,12 @@ class Account extends Component {
 							<Col>
 								<Row className='pe-0 mb-4'>
 									<Col xs={12} md={6} className='d-flex align-items-center'>
-										<img src={avatar} alt='avatar' style={{ maxWidth: '40px' }} className='me-3' />
+										<img
+											src={this.props.avatar}
+											alt='avatar'
+											style={{ maxWidth: '40px' }}
+											className='me-3'
+										/>
 										<p className='fw-bold m-0'>Mattia</p>
 									</Col>
 									<Col xs={12} md={6} className='text-start text-md-end pe-0'>
