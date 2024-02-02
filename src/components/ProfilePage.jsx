@@ -3,7 +3,6 @@ import MyNavbar from './MyNavbar'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Dropdown from 'react-bootstrap/Dropdown'
 import avatar from '../assets/imgs/avatar.png'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
@@ -14,6 +13,10 @@ export default class ProfilePage extends Component {
 		language: 'English',
 		autoPlayNext: false,
 		autoPlayPreviews: false,
+	}
+
+	componentDidMount() {
+		document.body.dataset.bsTheme = 'dark'
 	}
 	render() {
 		return (
