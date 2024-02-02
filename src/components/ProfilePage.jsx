@@ -40,7 +40,7 @@ export default class ProfilePage extends Component {
 											<div className='circle-wrap text-light border border-1 border-light rounded-circle position-absolute d-flex align-items-center justify-content-center bg-dark p-2 shadow-lg bottom-0 ms-2 mb-2 start-0'>
 												<i className='bi bi-pencil-fill'></i>
 											</div>
-											<img className='img-fluid ' src={avatar} alt='avatar' />
+											<img className='img-fluid ' src={this.props.avatar} alt='avatar' />
 										</div>
 									</Col>
 									<Col xs={12} md={9}>
@@ -57,10 +57,12 @@ export default class ProfilePage extends Component {
 											</div>
 											<div className='mb-4'>
 												<h5 className='mb-3 fw-normal'>Language:</h5>
-												<Form.Select aria-label='Select language' className='w-max-content'>
-													<option value='1' selected>
-														English
-													</option>
+												<Form.Select
+													aria-label='Select language'
+													className='w-max-content'
+													defaultValue={'1'}
+												>
+													<option value='1'>English</option>
 													<option value='2'>Italian</option>
 													<option value='3'>Franch</option>
 													<option value='3'>Spanish</option>
@@ -71,12 +73,12 @@ export default class ProfilePage extends Component {
 											<div className='mb-4'>
 												<h5 className='mb-3 fw-normal'>Maturity settings:</h5>
 												<div
-													class='bg-custom-1 py-1 px-2 w-max-content'
+													className='bg-custom-1 py-1 px-2 w-max-content'
 													aria-describedby='maturityHelp'
 												>
 													ALL MATURITY RATINGS RATINGS
 												</div>
-												<div id='maturityHelp' class='form-text mb-3'>
+												<div id='maturityHelp' className='form-text mb-3'>
 													Show titles of all maturity ratings for this profile.
 												</div>
 												<Button variant='outline-secondary' className='px-4 py-1'>

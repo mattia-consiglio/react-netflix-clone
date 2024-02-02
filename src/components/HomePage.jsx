@@ -8,10 +8,11 @@ class HomePage extends Component {
 		document.body.dataset.bsTheme = 'dark'
 	}
 	render() {
+		console.log(this.props)
 		return (
 			<>
 				<header>
-					<MyNavbar isHome />
+					<MyNavbar isHome avatar={this.props.avatar} />
 				</header>
 				<main>
 					<TVShows />

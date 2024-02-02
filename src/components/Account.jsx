@@ -11,12 +11,12 @@ function LinkMap({ links, pe0 = false }) {
 		<>
 			{links.map((link, i) => {
 				return (
-					<>
-						<a href='#' className={pe0 && 'pe-0'}>
+					<React.Fragment key={link}>
+						<a href='#' className={pe0 ? 'pe-0' : ''}>
 							{link}
 						</a>
 						{i !== links.length - 1 && <br />}
-					</>
+					</React.Fragment>
 				)
 			})}
 		</>
