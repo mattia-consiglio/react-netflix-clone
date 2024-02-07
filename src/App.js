@@ -8,6 +8,7 @@ import Account from './components/Account'
 import { useState, useEffect } from 'react'
 import MovieDetail from './components/MovieDetail'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 function importAll(r) {
 	return r.keys().map(r)
@@ -62,6 +63,7 @@ const App = () => {
 				<Route path='*' element={<h1>404</h1>} />
 			</Routes>
 			<Analytics />
+			<SpeedInsights />
 		</BrowserRouter>
 	)
 }
