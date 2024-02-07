@@ -37,6 +37,7 @@ function MovieDetail({ avatar, profileName }) {
 
 	useEffect(() => {
 		document.body.dataset.bsTheme = 'dark'
+		window.scrollTo(0, 0)
 	}, [])
 
 	useEffect(() => {
@@ -92,29 +93,36 @@ function MovieDetail({ avatar, profileName }) {
 
 					{!isLoadingMovie && movie && (
 						<Row
-							className='justify-content-center p-4 position-relative'
+							className='justify-content-center position-relative'
 							style={{
 								minHeight: '60vh',
-								backgroundImage: 'linear-gradient(to bottom, rgb(0 0 0 / 75%) 60%, transparent)',
 							}}
 						>
 							<div className='bgHero' style={{ backgroundImage: `url('${movie.Poster}')` }}></div>
-							<Col xs={12} md={6} className='text-center'>
-								<img src={movie.Poster} alt={movie.Title} />
+							<Col xs={12} md={6} className='d-flex justify-content-center align-items-center py-4'>
+								<img src={movie.Poster} alt={movie.Title} className='img-fluid' />
 							</Col>
 							<Col
 								xs={12}
 								md={6}
-								className='d-flex flex-column justify-content-center align-items-center'
+								className='d-flex flex-column justify-content-center align-items-center p-5'
+								style={{
+									backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,80%) 70%, transparent)',
+								}}
 							>
-								<h1>{movie.Title}</h1>
+								<h1 className='my-4 mt-md-0 mb-md-3 text-center'>{movie.Title}</h1>
+								{movie.Director !== 'N/A' && (
+									<p>
+										<strong>Director:</strong> {movie.Director}
+									</p>
+								)}
+								<p>{movie.Plot}</p>
 							</Col>
 						</Row>
 					)}
 
 					<Row className='justify-content-center pt-4'>
 						<Col xs={12} md={6} lg={6}>
-							<h3>Comments</h3>
 							<AddReview
 								movieId={movieId}
 								setError={setError}
@@ -122,6 +130,7 @@ function MovieDetail({ avatar, profileName }) {
 								updated={updated}
 							/>
 							<hr className='mb-4' />
+							<h3>Comments</h3>
 							{isLoadingComments && <Loading />}
 							{!isLoadingComments &&
 								comments.length > 0 &&

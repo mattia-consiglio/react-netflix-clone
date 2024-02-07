@@ -13,7 +13,7 @@ function TVShows() {
 		<>
 			<section>
 				<Container fluid>
-					<Row className='align-items-center'>
+					<Row className='align-items-center mx-4'>
 						<Col xs={8}>
 							<div className='d-flex column-gap-5 align-items-center flex-wrap'>
 								<h1>TV Shows</h1>
