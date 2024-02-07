@@ -9,7 +9,7 @@ import Loading from './Loading'
 import API from '../api'
 import StarRating from './StarRating'
 import Button from 'react-bootstrap/Button'
-import { IoTrashBinOutline } from 'react-icons/io5'
+import { IoTrash } from 'react-icons/io5'
 import AddReview from './AddReview'
 
 function MovieDetail({ avatar, profileName }) {
@@ -49,7 +49,7 @@ function MovieDetail({ avatar, profileName }) {
 				return res.json()
 			})
 			.then(data => {
-				console.log(data)
+				// console.log(data)
 				setMovie(data)
 				setIsLoadingMovie(false)
 			})
@@ -65,6 +65,7 @@ function MovieDetail({ avatar, profileName }) {
 		new API({
 			method: 'GET',
 			callbackSuccess: data => {
+				console.log(data)
 				setComments(data)
 				setIsLoadingComments(false)
 			},
@@ -123,28 +124,33 @@ function MovieDetail({ avatar, profileName }) {
 
 					<Row className='justify-content-center pt-4'>
 						<Col xs={12} md={6} lg={6}>
-							<AddReview
-								movieId={movieId}
-								setError={setError}
-								setUpdated={setUpdated}
-								updated={updated}
-							/>
+							{!isLoadingComments && (
+								<AddReview
+									movieId={movieId}
+									setError={setError}
+									setUpdated={setUpdated}
+									updated={updated}
+								/>
+							)}
 							<hr className='mb-4' />
 							<h3>Comments</h3>
 							{isLoadingComments && <Loading />}
+							{error && <p>Something went wrong. Please try again later.</p>}
+							{comments.length === 0 && !error && <p>No comments yet.</p>}
 							{!isLoadingComments &&
 								comments.length > 0 &&
+								!error &&
 								comments.map(comment => {
 									return (
-										<div key={comment._id} className='d-flex'>
+										<div key={comment._id} className='d-flex border-bottom py-3'>
 											<div className='flex-grow-1'>
 												<StarRating rating={comment.rate} />
-												<h4>{comment.name}</h4>
+												<p>{comment.author}</p>
 												<p>{comment.comment}</p>
 											</div>
-											<div>
-												<Button variant='danger' onClick={() => deleteComment(comment._id)}>
-													<IoTrashBinOutline />
+											<div className='d-flex align-items-center justify-content-center'>
+												<Button variant='secondary' onClick={() => deleteComment(comment._id)}>
+													<IoTrash />
 												</Button>
 											</div>
 										</div>
