@@ -8,7 +8,7 @@ import Account from './components/Account'
 import { useState, useEffect } from 'react'
 import MovieDetail from './components/MovieDetail'
 import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 function importAll(r) {
 	return r.keys().map(r)
