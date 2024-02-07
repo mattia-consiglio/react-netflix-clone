@@ -24,16 +24,36 @@ function Footer() {
 		<Container className='text-secondary'>
 			<Row>
 				<Col className='d-flex column-gap-3 fs-4'>
-					<a className='text-secondary text-decoration-none' href='#'>
+					<a
+						className='text-secondary text-decoration-none'
+						href='https://www.facebook.com'
+						target='_blank'
+						rel='noopner noreferrer'
+					>
 						<i className='bi bi-facebook'></i>
 					</a>
-					<a className='text-secondary text-decoration-none' href='#'>
+					<a
+						className='text-secondary text-decoration-none'
+						href='https://www.instagram.com'
+						target='_blank'
+						rel='noopner noreferrer'
+					>
 						<i className='bi bi-instagram'></i>
 					</a>
-					<a className='text-secondary text-decoration-none' href='#'>
+					<a
+						className='text-secondary text-decoration-none'
+						href='https://twitter.com'
+						target='_blank'
+						rel='noopner noreferrer'
+					>
 						<i className='bi bi-twitter-x'></i>
 					</a>
-					<a className='text-secondary text-decoration-none' href='#'>
+					<a
+						className='text-secondary text-decoration-none'
+						href='https://www.youtube.com'
+						target='_blank'
+						rel='noopner noreferrer'
+					>
 						<i className='bi bi-youtube'></i>
 					</a>
 				</Col>

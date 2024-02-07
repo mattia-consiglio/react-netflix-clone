@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import MyNavbar from './MyNavbar'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -36,120 +36,114 @@ function SettingSection({ title, children, titleExtra = '' }) {
 	)
 }
 
-class Account extends Component {
-	componentDidMount() {
+const Account = ({ avatar, profileName }) => {
+	useEffect(() => {
 		document.body.dataset.bsTheme = 'light'
-	}
-	render() {
-		return (
-			<>
-				<header data-bs-theme='dark'>
-					<MyNavbar avatar={this.props.avatar} />
-				</header>
-				<main>
-					<Container className='mt-4'>
-						<Row>
-							<Col>
-								<h1 className='fw-normal'>Account</h1>
-							</Col>
-						</Row>
-						<hr className='border-2' />
-						<SettingSection
-							title='MEMBERSHIP & BILLING'
-							titleExtra={<Button variant='secondary'>Cancel Membership</Button>}
-						>
-							{[
-								{ text: 'student@strive.school', link: 'Change account email', secondary: false },
-								{ text: 'Password: ********', link: 'Change password', secondary: true },
-								{ text: 'Phone: 321 044 1279', link: 'Change phone number', secondary: true },
-							].map(row => {
-								return (
-									<Row key={row.text} className='pe-0'>
-										<Col xs={12} md={6}>
-											<p className={'mb-2' + (row.secondary === true ? ' text-secondary' : '')}>
-												{row.text}
-											</p>
-										</Col>
-										<Col xs={12} md={6} className='text-start text-md-end pe-0'>
-											<LinkMap links={[row.link]} />
-										</Col>
-									</Row>
-								)
-							})}
-							<hr />
-							<Row className='pe-0'>
-								<Col xs={12} md={6}>
-									<p className='mb-2'>
-										<i className='bi bi-paypal'></i>{' '}
-										<span className='fw-medium'>admin@epicode.com</span>
-									</p>
-								</Col>
-								<Col xs={12} md={6} className='text-start text-md-end pe-0'>
-									<LinkMap links={['Update payment info', 'Billing details']} />
-								</Col>
-							</Row>
-						</SettingSection>
-						<hr />
-						<SettingSection title='PLAN DETAILS'>
-							<Col xs={12} md={6}>
-								<p className='mb-2'>
-									<span className='fw-medium'>Premium</span>{' '}
-									<span className='border border-2 border-dark rounded p-1'>
-										ULTRA <strong>HD</strong>
-									</span>
-								</p>
-							</Col>
-							<Col xs={12} md={6} className='text-start text-md-end'>
-								<LinkMap links={['Change plan']} />
-							</Col>
-						</SettingSection>
-						<hr />
-						<SettingSection title='SETTINGS'>
-							<Col>
-								<LinkMap
-									links={[
-										'Parental controls',
-										'Test participation',
-										'Manage download devices',
-										'Activate a device',
-										'Recent device streaming activity',
-										'Sign out of all devices',
-									]}
-								/>
-							</Col>
-						</SettingSection>
-						<hr />
-						<SettingSection title='MY PROFILE'>
-							<Col>
-								<Row className='pe-0 mb-4'>
-									<Col xs={12} md={6} className='d-flex align-items-center'>
-										<img
-											src={this.props.avatar}
-											alt='avatar'
-											style={{ maxWidth: '40px' }}
-											className='me-3'
-										/>
-										<p className='fw-bold m-0'>Mattia</p>
+	}, [])
+
+	return (
+		<>
+			<header data-bs-theme='dark'>
+				<MyNavbar avatar={avatar} />
+			</header>
+			<main>
+				<Container className='mt-4'>
+					<Row>
+						<Col>
+							<h1 className='fw-normal'>Account</h1>
+						</Col>
+					</Row>
+					<hr className='border-2' />
+					<SettingSection
+						title='MEMBERSHIP & BILLING'
+						titleExtra={<Button variant='secondary'>Cancel Membership</Button>}
+					>
+						{[
+							{ text: 'student@strive.school', link: 'Change account email', secondary: false },
+							{ text: 'Password: ********', link: 'Change password', secondary: true },
+							{ text: 'Phone: 321 044 1279', link: 'Change phone number', secondary: true },
+						].map(row => {
+							return (
+								<Row key={row.text} className='pe-0'>
+									<Col xs={12} md={6}>
+										<p className={'mb-2' + (row.secondary === true ? ' text-secondary' : '')}>
+											{row.text}
+										</p>
 									</Col>
 									<Col xs={12} md={6} className='text-start text-md-end pe-0'>
-										<LinkMap links={['Manage profiles', 'Add profile email']} />
+										<LinkMap links={[row.link]} />
 									</Col>
 								</Row>
-								<Row>
-									<Col xs={12} md={6}>
-										<LinkMap links={['Language', 'Playback settings', 'Subtitle appearance']} />
-									</Col>
-									<Col xs={12} md={6}>
-										<LinkMap links={['Viewing activity', 'Ratings']} />
-									</Col>
-								</Row>
+							)
+						})}
+						<hr />
+						<Row className='pe-0'>
+							<Col xs={12} md={6}>
+								<p className='mb-2'>
+									<i className='bi bi-paypal'></i>{' '}
+									<span className='fw-medium'>admin@epicode.com</span>
+								</p>
 							</Col>
-						</SettingSection>
-					</Container>
-				</main>
-			</>
-		)
-	}
+							<Col xs={12} md={6} className='text-start text-md-end pe-0'>
+								<LinkMap links={['Update payment info', 'Billing details']} />
+							</Col>
+						</Row>
+					</SettingSection>
+					<hr />
+					<SettingSection title='PLAN DETAILS'>
+						<Col xs={12} md={6}>
+							<p className='mb-2'>
+								<span className='fw-medium'>Premium</span>{' '}
+								<span className='border border-2 border-dark rounded p-1'>
+									ULTRA <strong>HD</strong>
+								</span>
+							</p>
+						</Col>
+						<Col xs={12} md={6} className='text-start text-md-end'>
+							<LinkMap links={['Change plan']} />
+						</Col>
+					</SettingSection>
+					<hr />
+					<SettingSection title='SETTINGS'>
+						<Col>
+							<LinkMap
+								links={[
+									'Parental controls',
+									'Test participation',
+									'Manage download devices',
+									'Activate a device',
+									'Recent device streaming activity',
+									'Sign out of all devices',
+								]}
+							/>
+						</Col>
+					</SettingSection>
+					<hr />
+					<SettingSection title='MY PROFILE'>
+						<Col>
+							<Row className='pe-0 mb-4'>
+								<Col xs={12} md={6} className='d-flex align-items-center'>
+									<img src={avatar} alt='avatar' style={{ maxWidth: '40px' }} className='me-3' />
+									<p className='fw-bold m-0'>{profileName}</p>
+								</Col>
+								<Col xs={12} md={6} className='text-start text-md-end pe-0'>
+									<LinkMap links={['Manage profiles', 'Add profile email']} />
+								</Col>
+							</Row>
+							<Row>
+								<Col xs={12} md={6}>
+									<LinkMap links={['Language', 'Playback settings', 'Subtitle appearance']} />
+								</Col>
+								<Col xs={12} md={6}>
+									<LinkMap links={['Viewing activity', 'Ratings']} />
+								</Col>
+							</Row>
+						</Col>
+					</SettingSection>
+				</Container>
+			</main>
+		</>
+	)
 }
 
 export default Account

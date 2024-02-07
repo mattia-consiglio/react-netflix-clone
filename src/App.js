@@ -5,81 +5,62 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HomePage from './components/HomePage'
 import ProfilePage from './components/ProfilePage'
 import Account from './components/Account'
-import { Component } from 'react'
+import { useState, useEffect } from 'react'
+import MovieDetail from './components/MovieDetail'
 function importAll(r) {
 	return r.keys().map(r)
 }
 
-class App extends Component {
-	constructor(props) {
-		super(props)
+const App = () => {
+	const [images, setImages] = useState([])
+	const [avatar, setAvatar] = useState('')
+	const [profileName, setProfileName] = useState('Mattia')
 
-		this.state = {
-			images: [],
-			avatar: '',
-			profileName: 'Mattia',
-		}
-	}
-
-	componentDidMount() {
+	useEffect(() => {
 		const images = importAll(require.context('./assets/imgs/avatars', false, /\.(png|jpe?g|svg)$/))
 		const localSettings = localStorage.getItem('netflixSettings')
-		const settings = { images, avatar: images[0], profileName: this.state.profileName }
+		const settings = { images, avatar: images[0], profileName }
 		if (localSettings) {
 			const parsedLocalSetting = JSON.parse(localSettings)
 			settings.avatar = parsedLocalSetting.avatar
 			settings.profileName = parsedLocalSetting.profileName
 		}
-		this.setState(settings)
-	}
 
-	componentDidUpdate(prevState) {
-		if (
-			prevState.avatar !== this.state.avatar ||
-			prevState.profileName !== this.state.profileName
-		) {
-			localStorage.setItem(
-				'netflixSettings',
-				JSON.stringify({ avatar: this.state.avatar, profileName: this.state.profileName })
-			)
-		}
-	}
+		setImages(settings.images)
+		setAvatar(settings.avatar)
+		setProfileName(settings.profileName)
+	}, [])
 
-	render() {
-		console.log(this.state)
-		return (
-			<BrowserRouter>
-				<Routes>
-					<Route
-						exact
-						path='/'
-						element={<HomePage avatar={this.state.avatar} profileName={this.props.profileName} />}
-					/>
-					<Route
-						exact
-						path='/profile'
-						element={
-							<ProfilePage
-								avatar={this.state.avatar}
-								setAvatar={avatar => {
-									this.setState({ avatar })
-								}}
-								images={this.state.images}
-								profileName={this.state.profileName}
-								setProfileName={profileName => {
-									this.setState({ profileName })
-								}}
-							/>
-						}
-					/>
-					<Route
-						path='/account'
-						element={<Account avatar={this.state.avatar} profileName={this.props.profileName} />}
-					/>
-				</Routes>
-			</BrowserRouter>
-		)
-	}
+	useEffect(() => {
+		localStorage.setItem('netflixSettings', JSON.stringify({ avatar, profileName }))
+	}, [avatar, profileName])
+
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route exact path='/' element={<HomePage avatar={avatar} profileName={profileName} />} />
+				<Route
+					exact
+					path='/profile'
+					element={
+						<ProfilePage
+							avatar={avatar}
+							setAvatar={setAvatar}
+							images={images}
+							profileName={profileName}
+							setProfileName={setProfileName}
+						/>
+					}
+				/>
+				<Route path='/account' element={<Account avatar={avatar} profileName={profileName} />} />
+				<Route
+					path='/movie/:movieId'
+					element={<MovieDetail avatar={avatar} profileName={profileName} />}
+				/>
+				<Route path='*' element={<h1>404</h1>} />
+			</Routes>
+		</BrowserRouter>
+	)
 }
 
 export default App

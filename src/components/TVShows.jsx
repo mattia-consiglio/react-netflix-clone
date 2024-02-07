@@ -12,7 +12,7 @@ function TVShows() {
 	return (
 		<>
 			<section>
-				<Container>
+				<Container fluid>
 					<Row className='align-items-center'>
 						<Col xs={8}>
 							<div className='d-flex column-gap-5 align-items-center flex-wrap'>

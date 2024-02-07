@@ -4,9 +4,11 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-function MyNavbar({ onlyLogo = false, isHome = false, avatar }) {
+function MyNavbar({ onlyLogo = false, avatar }) {
+	const location = useLocation()
+
 	return (
 		<Navbar expand='lg' variant='dark'>
 			<Container>
@@ -21,7 +23,7 @@ function MyNavbar({ onlyLogo = false, isHome = false, avatar }) {
 								<Link to='/' className='nav-link'>
 									Home
 								</Link>
-								<Link to='/' className={'nav-link' + (isHome ? ' active' : '')}>
+								<Link to='/' className={'nav-link' + (location.pathname === '/' ? ' active' : '')}>
 									TV Shows
 								</Link>
 								<Link to='/' className='nav-link'>
