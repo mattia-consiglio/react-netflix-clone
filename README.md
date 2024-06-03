@@ -6,7 +6,7 @@
 
 A partial replica of the Netflix App.
 
-Deployed version: https://netflix-clone-xi-liart.vercel.app/
+Deployed version: https://netflix-clone-mattia-consiglio.vercel.app/
 
 Sections cloned: TV Shows, Profile page with picture editing, Account page.<br>
 Extras: movie's details page
