@@ -8,7 +8,7 @@ A partial replica of the Netflix App.
 
 Deployed version: https://netflix-clone-xi-liart.vercel.app/
 
-Sections cloned: TV Shows, Profile page with picture editing, Account page.
-Extras: detail page of the movie
+Sections cloned: TV Shows, Profile page with picture editing, Account page.<br>
+Extras: movie's details page
 
 This project is part of EPICODE bootcamp.
