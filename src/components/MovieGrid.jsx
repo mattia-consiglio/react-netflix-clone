@@ -90,16 +90,16 @@ const MovieGrid = ({ q, title, className }) => {
 					</Col>
 				</Row>
 				<div className='position-relative slider-warpaper'>
-					<div className='slider-btn prev-btn' onClick={() => updateStep('prev')}>
-						<i className='bi bi-chevron-compact-left'></i>
-					</div>
-					<div
-						className='slider-btn next-btn'
+					<button
+						className='slider-btn prev-btn'
 						onClick={() => updateStep('next')}
 						style={{ display: step === 0 ? 'none' : 'flex' }}
 					>
+						<i className='bi bi-chevron-compact-left'></i>
+					</button>
+					<button className='slider-btn next-btn' onClick={() => updateStep('prev')}>
 						<i className='bi bi-chevron-compact-right'></i>
-					</div>
+					</button>
 					<Row
 						className='flex-nowrap gx-1 position-relative overflow-x-visible movies-warpaper'
 						style={{ transform: `translateX(${step * cardWidth}px)` }}

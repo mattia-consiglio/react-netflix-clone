@@ -120,6 +120,7 @@ $sideBtnSize: 52px;
 	cursor: pointer;
 	z-index: 100;
 	transition: 300ms ease-in-out;
+	border: none;
 
 	&.prev-btn {
 		left: 0;
