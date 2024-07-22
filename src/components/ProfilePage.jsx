@@ -17,6 +17,7 @@ export default function ProfilePage({
 	const [modalOpen, setModalOpen] = useState(false)
 	const [avatar, setAvatar] = useState('')
 	const [profileName, setProfileName] = useState('Mattia')
+	const [savedModalOpen, setSavedModalOpen] = useState(false)
 
 	useEffect(() => {
 		document.body.dataset.bsTheme = 'dark'
@@ -124,8 +125,8 @@ export default function ProfilePage({
 										className='fw-bold px-4 px-3'
 										onClick={() => {
 											setAvatarProp(avatar)
-											setProfileName(profileName)
-											alert('Settings saved')
+											setProfileNameProp(profileName)
+											setSavedModalOpen(true)
 										}}
 									>
 										SAVE
@@ -165,7 +166,28 @@ export default function ProfilePage({
 						</Row>
 					</Modal.Body>
 				</Modal>
+				<SavedModal show={savedModalOpen} onHide={() => setSavedModalOpen(false)} />
 			</main>
 		</>
+	)
+}
+
+function SavedModal(props) {
+	return (
+		<Modal {...props} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
+			<Modal.Header closeButton>
+				<Modal.Title id='contained-modal-title-vcenter'>Setting saved</Modal.Title>
+			</Modal.Header>
+			<Modal.Body>
+				<p>
+					Settings saved successfully. You can close this window or continue to edit your profile.
+				</p>
+			</Modal.Body>
+			<Modal.Footer>
+				<Button variant='light' className='fw-bold px-4 px-3' onClick={props.onHide}>
+					OK
+				</Button>
+			</Modal.Footer>
+		</Modal>
 	)
 }
